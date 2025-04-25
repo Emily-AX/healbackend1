@@ -73,6 +73,7 @@ public class UserController {
         } else {
             response.put("result", true);
             response.put("message", "登录成功!");
+            //传送数据给前端
             response.put("username", existingUser.getUsername());
             response.put("role", existingUser.getRole());
             response.put("createdAt", existingUser.getCreatedAt());
