@@ -1,5 +1,6 @@
 package org.example.healbackend.controller;
 
+import org.example.healbackend.Utils.TimeUtil;
 import org.example.healbackend.bean.User;
 import org.example.healbackend.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +75,21 @@ public class UserController {
             response.put("message", "登录成功!");
             response.put("username", existingUser.getUsername());
             response.put("role", existingUser.getRole());
+            response.put("createdAt", existingUser.getCreatedAt());
+            response.put("userId", existingUser.getId());
+            System.out.println("role: " + existingUser.getRole());
+            System.out.println("createdAt: " + existingUser.getCreatedAt());
+            System.out.println("userId: " + existingUser.getId());
+            handleSuccessLogin(user.getUsername());
         }
         return response;
+    }
+
+    private void handleSuccessLogin(String username) {
+        // 获取当前时间
+        String loginTime = TimeUtil.getCurrentTimeString();
+
+        // 记录登录日志
+        System.out.println("用户 " + username + " 登录成功，时间：" + loginTime);
     }
 }
