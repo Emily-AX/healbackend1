@@ -1,6 +1,7 @@
 package org.example.healbackend.controller;
 
 import org.example.healbackend.bean.Question;
+import org.example.healbackend.bean.Questions;
 import org.example.healbackend.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,14 @@ public class QuestionController {
 
     // 获取所有问题
     @GetMapping
-    public List<Question> getAllQuestions() {
+    public ArrayList<Questions> getAllQuestions() {
         return questionMapper.getAllQuestions();
     }
 
     // 根据ID查询问题
     @GetMapping("/{question_id}")
-    public ResponseEntity<Question> getQuestionById(@PathVariable int question_id) {
-        Question question = questionMapper.getQuestionById(question_id);
+    public ResponseEntity<Questions> getQuestionById(@PathVariable int question_id) {
+        Questions question = questionMapper.getQuestionById(question_id);
         if (question != null) {
             return ResponseEntity.ok(question);
         } else {
