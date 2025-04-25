@@ -1,0 +1,33 @@
+import okhttp3.*;
+
+public class ChatClient {
+    public static void main(String[] args) {
+        OkHttpClient client = new OkHttpClient();
+
+        // JSON 请求体
+        String json = """
+        {
+            "message": "你好，我最近几天心情不顺心，可以和你聊聊吗？",
+            "mode": "chat"
+        }
+        """;
+
+        // 构造请求
+        Request request = new Request.Builder()
+            .url("http://healchat.cpolar.top/api/v1/workspace/heal/chat")
+            .addHeader("accept", "application/json")
+            .addHeader("Authorization", "Bearer GNXYRES-VMF4QV8-MNXMEDT-5AG6D4W")
+            .addHeader("Content-Type", "application/json")
+            .post(RequestBody.create(json, MediaType.parse("application/json")))
+            .build();
+
+        // 发送请求并处理响应
+        try (Response response = client.newCall(request).execute()) {
+            if (response.body() != null) {
+                System.out.println("响应内容：" + response.body().string());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
